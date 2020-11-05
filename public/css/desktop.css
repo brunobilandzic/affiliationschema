@@ -1,0 +1,71 @@
+.justify-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar{
+  /* padding: 30px 0; */
+}
+.posts-container, .about-container,  .sort-hr, .top-label{
+  width:75%;
+  margin:auto;
+}
+.navbar-nav{
+  align-items: center;
+}
+/* .navbar-brand{
+  font-size: 1.75rem;
+}
+.navbar-collapse{
+  font-size: 1.5rem;
+} */
+.not-nav:hover{
+  cursor:pointer;
+}
+.notList{
+  width: 300px;
+  align-self: center;
+  left: -133px;
+}
+/* GREETING */
+.greeting-container{
+  margin-top: 100px;
+  font-size: 1.2rem;
+}
+
+.button-box{
+
+
+}
+.button-box .btn{
+  width:110px;
+
+}
+/* About */
+
+
+/* POSTS */
+
+.comments-box{
+
+}
+.like-count:hover{
+  cursor:pointer;
+}
+
+.like-icon:hover{
+  cursor: pointer;
+}
+
+.expand-comments:hover, .shrink-comments:hover{
+  cursor:pointer;
+}
+.delete-btn:hover{
+  cursor: pointer;
+}
+
+/* login */
+.fp-link:hover{
+  text-decoration: none;
+  font-weight: 600;
+  color: #969696;
+}

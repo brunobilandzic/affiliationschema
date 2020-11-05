@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Affiliation Schema</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Piazzolla:wght@700&family=Lato&family=Sansita+Swashed&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" media="screen and (max-width: 1000px)" href="/css/mobile.css">
+  <link rel="stylesheet" media="screen and (min-width: 1000px)" href="/css/desktop.css">
+
+  <div class="main-container">
+
+  <nav class="navbar navbar-expand-lg">
+
+    <a class="navbar-brand" href="/">Affiliation Schema</a>
+
+    <div class="navbar-content justify-right">
+
+
+    <div class="justify-right not-container">
+      <ul class="navbar-nav nav-right">
+        <li class="nav-item">
+          <% if(auth && (typeof(user) != "undefined")) {%>
+          <div class="nav-link not-nav" href="#"><i class="far fa-bell not-drop"></i>
+            <% let newNotifications = user.notifications.filter(not => !not.seen); %>
+            <% if(newNotifications.length!=0){ %>
+            <div class="not-count"><%= newNotifications.length%></div>
+            <% } %>
+            <div class="notList hidden">
+              <ul class="list-group">
+                <% for(let i=user.notifications.length-1; i>=0; i--) { %>
+                <% let notification = user.notifications[i] %>
+                <% if(!notification.seen) { %>
+                <b>
+
+                  <li class="list-group-item not not-not-seen">
+
+
+
+                    <a class="user-link not-link link" href="/users/<%= notification.author %>"><%= notification.author %></a>
+                    <span class="not-type"><%= notification.type + "ed" %></span>
+                    <a class="user-link link not-link" href="/posts/<%= notification.post_id %>">&quot;<%=notification.postName%>&quot;</a> <br />
+                    <div class="not-date">
+                      <% if(typeof(notification.dateAdded)!="undefined") { %>
+                      <%=notification.dateAdded.toLocaleString()%>
+                      <% } %>
+                    </div>
+                  </li>
+                </b>
+                <% } else { %>
+                <li class="list-group-item not">
+                  <a class="user-link not-link link" href="/users/<%= notification.author %>"><%= notification.author %></a>
+                  <span class="not-type"><%= notification.type + "ed" %></span>
+                  <a class="user-link link not-link" href="/posts/<%= notification.post_id %>">&quot;<%=notification.postName%>&quot;</a><br/>
+                  <div class="not-date">
+                    <% if(typeof(notification.dateAdded)!="undefined") { %>
+                    <%=notification.dateAdded.toLocaleString()%>
+                    <% } %>
+                  </div>
+                </li>
+                <% if(i<user.notifications.length-4) { %>
+
+
+
+                <%  break;} %>
+                <%}}%>
+              </ul>
+            </div>
+
+          </div>
+          <% } %>
+        </li>
+      </ul>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fas fa-grip-lines"></i></span>
+    </button>
+    </div>
+    <div class="collapse justify-right navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav navbar-right">
+
+        <li class="nav-item">
+          <form class="search-form" action="/search" method="post">
+            <input type="text" class="searchbox" name="query" placeholder="Search" autocomplete="off" />
+            <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/all-posts">All Posts</a>
+            <a class="dropdown-item" href="/user-posts">Your Posts</a>
+            <a class="dropdown-item" href="/categories/poetry">Poetry</a>
+            <a class="dropdown-item" href="/categories/worries">Worries</a>
+            <a class="dropdown-item" href="/categories/joys">Joys</a>
+            <a class="dropdown-item" href="/categories/politics">Politics</a>
+            <a class="dropdown-item" href="/categories/tv-and-music">TV and Music</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/categories/others">Others</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <% if(auth) { %>
+          <a class="nav-link" href="/compose">Compose</a>
+          <% } %>
+        </li>
+        <li class="nav-item">
+          <% if (!auth) { %>
+          <a class="nav-link" href="/sing-up">Sing up</a>
+          <% } %>
+        </li>
+        <li class="nav-item">
+          <%if (!auth) { %>
+          <a class="nav-link" href="/log-in">Log in</a>
+          <% } else {  %>
+          <a class="nav-link" href="/log-out">Log out</a>
+          <% } %>
+        </li>
+
+
+      </ul>
+    </div>
+  </nav>
+
+</head>
+
+<body>
+  <div class="container-fluid">

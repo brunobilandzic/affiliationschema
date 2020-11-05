@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+
+<form class="form auth-form li-form" action="/log-in" method="POST">
+  <%- include("partials/errors") %>
+  <input class="form-control" type="text" name="username" value="" placeholder="Username" autocomplete="off"/ >
+  <input class="form-control" type="password" name="password" value=""  placeholder="Password" autocomplete="off"/>
+  <button class="btn btn-light cus-btn my-1" type="submit" name="" value="">Log In</button><br />
+  <a class="fp-link" href="/resetpass">Forgotten Password</a>
+</form>
+
+
+<%- include("partials/footer") %>

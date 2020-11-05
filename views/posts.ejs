@@ -1,0 +1,142 @@
+<%- include("partials/header") %>
+<%if (typeof(title)!="undefined") { %>
+<div class="top-label">
+  <div class="page-heading">
+    <h2 class="mb-0"><%= title %></h2>
+  </div>
+
+  <div class="sort-container">
+    <p class="sort-text mb-0 clock">
+      <i class="fas fa-clock"></i>
+    </p>
+    <p class="sort-text mb-0 fire">
+      <i class="fas fa-fire"></i>
+    </p>
+  </div>
+</div>
+<hr class="sort-hr"/>
+<%} %>
+<div class="posts-container">
+  <% if (posts.length == 0) {%>
+    <div class="no-posts">
+     No posts yet :&quot(
+    </div>
+  <% } %>
+
+  <% if (posts.length < 3) { %>
+    <%var shorten = false; %>
+  <% } else { %>
+    <%var shorten= true; %>
+  <%} %>
+  <% posts.forEach((post) => { %>
+  <div id="<%=post._id%>" class="post-container">
+  <div class="post">
+  <div class="post-meta">
+
+
+    <div class="width-auto">
+      <div class="post-info">
+        <div class="post-category"><a class="category-link link" href="/categories/<%=post.category%>"><%=post.category%></a></div>
+        <div class="post-author"><a class="user-link author-link link" href="/users/<%= post.author %>">@<%= post.author %></a></div>
+        <div class="post-date"><%= post.dateAdded.toDateString()%></div>
+      </div>
+    </div>
+    <% if(auth && user.username == post.author) { %>
+      <i class="delete-btn fas fa-times" aria-hidden="true"></i>
+      <%} %>
+  </div>
+    <div class="post-heading">
+      <h3 class="<%= post.category %> post-title"><%= post.title %></h3>
+    </div>
+
+    <div class="post-content">
+      <% if((post.post.length>125 || post.post.split("\r\n").length>5) && shorten) { %>
+      <% if(post.post.length>125) { %>
+      <% postArr=post.post.slice(0,125).split("\r\n");%>
+      <%} else {%>
+      <% postArr= post.post.split("\r\n").slice(0,5);} %>
+      <% postArr.forEach((p) => { %>
+        <p>
+        <%if(p == "") { %>
+          <br />
+        <% } else { %>
+        <% if(!p.match(/\s/)) { %>
+        <% for (let i = 0; i<p.length; i+=40){ %>
+          <%= p.slice(i,40+i) + " "%>
+        <%}} else{ %>
+          <%= p %>
+        <%}} %>
+        </p>
+      <%}) %>
+      <a class="read-more link" href="/posts/<%=post._id%>">Read more</a>
+      <% } else { %>
+      <% postArr = post.post.split("\r\n")%>
+      <% postArr.forEach((p) => { %>
+        <p>
+        <%if(p == "") { %>
+          <br />
+        <% } else { %>
+        <% if(!p.match(/\s/)) { %>
+        <% for (let i = 0; i<p.length; i+=40){ %>
+          <%= p.slice(i,40+i) + " "%>
+        <%}} else{ %>
+          <%= p %>
+        <%}} %>
+        </p>
+      <%}) } %>
+    </div>
+
+  </div>
+  <hr />
+  <div class="comment-section-header">
+  <span><b>Comments</b></span>
+  <div class="like-box">
+    <span class="<%=post._id%> like-count"><%= post.likes.length %></span>
+    <% if(typeof(user) != "undefined" && post.likes.includes(user.username)) {%>
+      <i class="fas fa-heart like-icon"></i>
+    <%} else { %>
+      <i class="far fa-heart like-icon"></i>
+      <% } %>
+    <div class="<%=post._id%> likeList hidden">
+      <ul class="list-group">
+
+
+        <% post.likes.forEach((user) => { %>
+        <li class="list-group-item">
+          <a class="user-link link" href="/users/<%= user %>"><%= user %></a>
+        </li>
+        <%});%>
+      </ul>
+    </div>
+  </div>
+  </div>
+  <div class="<%=post._id%> comments-box">
+    <% post.comments.forEach((comment, i) => { %>
+    <% if (i<=2)  {%>
+    <div class="comment">
+      <div class="comment-author"><a class="user-link link" href="/users/<%= comment.author %>"><%=comment.author %></a></div>
+      <p class="comment-text"><%=comment.text %></p>
+    </div>
+    <% } %>
+    <% if( i==2 ) {%>
+    <div class="<%=post._id%> expand-comments"><b>Show All</b></div>
+    <%} %>
+    <% if( i>2) {%>
+    <div class="<%=post._id%> comment hidden">
+      <div class="comment-author"><a class="user-link link" href="/users/<%= comment.author %>"><b><%=comment.author %></b></a></div>
+      <p class="comment-text"><%=comment.text %></p>
+    </div>
+    <% } %>
+    <%});%>
+    <div class="shrink-comments <%=post._id%> hidden"><b>Show less</b></div>
+
+    <div class="new-comment">
+      <input class="form-control <%=post._id%> comment-input" name="comment" type="text" placeholder="Comment" autocomplete="off" />
+      <button class="btn btn-light <%=post._id%> cus-btn com-btn">Add</button>
+    </div>
+  </div>
+  </div>
+  <% }); %>
+
+</div>
+<%- include("partials/footer") %>

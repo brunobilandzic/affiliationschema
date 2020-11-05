@@ -1,0 +1,20 @@
+<%- include("partials/header") %>
+<%- include("partials/errors") %>
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>
+    You successfully singed up. But in order to like, comment and compose, you still have to verify your E-Mail. <br />
+    We dont want bad guys singing up with other peoples e-mail or "1@2.com".
+  </p>
+  <hr>
+  <p class="mb-0">So we've sent you an e-mail on
+    <% if(typeof(user)!="undefined") {%>
+      <b><%= user.email %></b>
+      <% } else { %>
+        Your E-Mail address
+      <%}%>
+    . Click on the link in the E-Mail message and you are then ready to go!
+  </p>
+</div>
+
+<%- include("partials/footer") %>

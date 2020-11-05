@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+<%- include("partials/errors") %>
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Password Reset Noticed!</h4>
+  <p>
+    Go to your E-Mail, click on a link and reset your password, you know how it goes.
+  </p>
+  <hr>
+  <p class="mb-0">We've sent you an e-mail on
+    <% if(typeof(user)!="undefined") {%>
+      <b><%= user.email %></b>
+      <% } else { %>
+        Your E-Mail address
+      <%}%>
+  </p>
+</div>
+
+<%- include("partials/footer") %>

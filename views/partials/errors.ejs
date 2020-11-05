@@ -1,0 +1,7 @@
+<% if (typeof(errorList)!="undefined") {%>
+  <div class="error-box">
+<% for (let i = 0; i<errorList.length; i++) { %>
+  <div class="alert alert-info error" role="alert">
+  <%=errorList[i]%>
+  </div>
+  <%}} %>

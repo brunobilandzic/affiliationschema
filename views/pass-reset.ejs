@@ -1,0 +1,8 @@
+<%- include("partials/header") %>
+<%- include("partials/errors") %>
+  <form class="form auth-form" action="/resetpass" method="post">
+    <h4 class="auth-heading">Reset Your Password</h4>
+    <input type="text" name="username" value="" class="pass-reset form-control" placeholder="Username" autocomplete="off" required>
+    <button type="submit" class="btn btn-light cus-btn">Reset Password</button>
+  </form>
+<%-include("partials/footer")%>

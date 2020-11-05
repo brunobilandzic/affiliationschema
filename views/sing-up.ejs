@@ -1,0 +1,20 @@
+<%- include("partials/header") %>
+
+
+<form class="form auth-form su-form" action="/sing-up" method="POST">
+  <div class="alert alert-dark su-info" role="alert">
+  In order to assure your anonymity, go to <a href="https://www.mail.com/int/" class="alert-link" target="_blank">mail.com</a> and create anonymous email address.
+  </div>
+  <div class="alert alert-dark su-info" role="alert">
+  We wont know <b>anything about who you are</b> if you use a anonymous E-Mail address.
+  </div>
+  <%- include("partials/errors") %>
+  <input class="form-control" type="email" name="email" value="" placeholder="E-mail" autocomplete="off" required>
+  <input class="form-control" type="text" name="username" value="" placeholder="Username" autocomplete="off" required / >
+  <input class="form-control" type="password" name="password" value=""  placeholder="Password" autocomplete="off" required />
+  <input class="form-control" type="password" name="password2" value="" placeholder="Repeat Password" autocomplete="off" required />
+  <button class="btn btn-light cus-btn my-1" type="submit" name="" value="">Sing me Up</button>
+</form>
+
+
+<%- include("partials/footer") %>
